@@ -31,7 +31,8 @@ await div(templates.join('<br><br>\n'), `bg-white text-black text-sm p-2`);
 
 
 //---- display buttons in widgets, that let you open IntelliJ Idea -----
-
+// put search string in clipboard for use in IDE later
+await copy(substring);
 // shrink the file path details for better button display, add Close button
 const items = files.map(path => ({
     name: path.slice(0, path.indexOf('/') + 1) + '..'
