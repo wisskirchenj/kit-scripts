@@ -1,0 +1,13 @@
+tmp
+templates
+node_modules
+logs
+lib
+kenvs
+cache
+.scripts
+.widgets
+app
+assets
+bin
+.DS_Store

@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@johnlindquist/kit": "file:../.kit"
+  }
+}
