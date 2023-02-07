@@ -18,24 +18,25 @@ const tokens = results.toString().replaceAll('<', '&lt;').split('******');
 const templates = [];
 const files: string[] = [];
 for (let i = 0; i < tokens.length - 1; i += 2) {
-    files[i / 2] = `${tokens[i + 1]}`;
+    files.push(`${tokens[i + 1]}`);
     // mark substrings in red.
-    templates[i / 2] = `<h3>${tokens[i + 1]}</h3>
+    templates.push(`<h3>${tokens[i + 1]}</h3>
         <pre>${tokens[i + 2]}</pre><hr>`
         .replaceAll(`${substring}`,
-            `<span class="text-red-500">${substring}</span>`);
+            `<span class="text-red-500">${substring}</span>`)
+    );
 }
-// show the templates => user can scroll in results and find most interesting, then press <RET> / Continue to open project in IDE
+// show the templates => user can scroll in results and then press <CR> to continue to dialog for opening project in IDE
 await div(templates.join('<br><br>\n'), `bg-white text-black text-sm p-2`);
 
 
 //---- display buttons in widgets, that let you open IntelliJ Idea -----
 
 // shrink the file path details for better button display, add Close button
-const items = files.map(path => ({ 
-    name: path.slice(0, path.indexOf('/') + 1) + '..' 
-        + path.slice(path.lastIndexOf('/'), path.length) 
-    }));
+const items = files.map(path => ({
+    name: path.slice(0, path.indexOf('/') + 1) + '..'
+        + path.slice(path.lastIndexOf('/'), path.length)
+}));
 items.push({ name: CLOSE_LABEL });
 const buttons = `
   <div class="grid grid-col w-screen h-screen justify-around items-center">
@@ -63,6 +64,7 @@ w.onClick(async event => {
 
         if (path === CLOSE_LABEL) {
             w.close();
+            exit(0);
         } else {
             await $`idea ${PROJECT_ROOT}/${path.slice(0, path.indexOf('/'))}`;
         }
