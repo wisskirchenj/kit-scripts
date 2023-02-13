@@ -11,10 +11,13 @@ const substring = await smallArg("Substring to search:");
 const lines = await smallArg("# surrounding lines in results:");
 
 const PROJECT_ROOT = "/Users/jwisskirchen/IdeaProjects";
-const CLOSE_LABEL = "Close";
+const IDE = 'idea';
+const FILE_EXT = 'java';
+const CLOSE_LABEL = 'Close';
 
 // execute find java-files on all project-subdirs not starting with 'z' (as those are special ones...)
-const results = await $`cd ${PROJECT_ROOT} ; find [^z]* -name *.java -exec grep -q ${substring} {} ';' -exec echo "******{}******" ';' -exec grep -${lines} ${substring} {} ';'`;
+const results = await $`cd ${PROJECT_ROOT} ; find [^z]* -name *.${FILE_EXT} -exec grep -q ${substring} {} ';' -exec echo "******{}******" ';' -exec grep -${lines} ${substring} {} ';'`;
+
 
 // Split filepaths and search results in tokens-array, replace '<' as this confuses html-rendering after span-insertion below
 const tokens = results.toString().replaceAll('<', '&lt;').split('******');
@@ -52,7 +55,7 @@ const items = files.map(path => ({
 items.push({ name: CLOSE_LABEL, display: CLOSE_LABEL });
 const buttons = `
   <div class="grid grid-col w-screen h-screen justify-around items-center">
-      <label class="rounded px-10 py-1 bg-white text-black">Open project in IDEA</label>
+      <label class="rounded px-10 py-1 bg-white text-black">Open project in ${IDE}</label>
       <button
       class="rounded px-10 py-1 bg-black bg-opacity-70 hover:bg-opacity-50"
       v-for="(item, index) in items" :key="item.name" :data-name="item.name" :data-index="index">{{ item.display }}</button>
@@ -79,9 +82,9 @@ w.onClick(async event => {
             exit(0);  // process keeps running without..
         } else {
             // open the project in IntelliJ IDEA
-            await $`idea ${PROJECT_ROOT}/${path.slice(0, path.indexOf('/'))}`;
+            await $`${IDE} ${PROJECT_ROOT}/${path.slice(0, path.indexOf('/'))}`;
             // open the specific file chosen inside this project
-            await $`idea ${PROJECT_ROOT}/${path}`;
+            await $`${IDE} ${PROJECT_ROOT}/${path}`;
             // inside IDEA (!) do a search Cmd-F for the substring 
             // Cmd-V places the substring from Clipboard (where we copied it above) into Ideas Search dialog
             await hide();
