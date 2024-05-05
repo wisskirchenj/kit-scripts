@@ -1,7 +1,7 @@
 // Shortcut: cmd opt o
 import "@johnlindquist/kit"
 
-const PROJECT_ROOT = "/Users/jwisskirchen/IdeaProjects";
+const PROJECT_ROOT = "/Users/juergen/IdeaProjects";
 
 let bashOut = await $`cd ${PROJECT_ROOT} ; ls`;
 const java = bashOut.toString().split('\n')
@@ -21,7 +21,7 @@ const buttons = `
   <div class="grid grid-cols-2 w-screen h-screen justify-around items-center">
       <label class="rounded px-10 py-1 bg-white text-black col-span-2">Open project in IDEA</label>
       <button
-      class="rounded px-10 py-1 mx-5 my-0 bg-black bg-opacity-70 hover:bg-opacity-50"
+      class="rounded px-10 py-1 mx-5 my-0 bg-black bg-opacity-40 hover:bg-opacity-20"
       v-for="(item, index) in items" :key="item.name" :data-name="item.name" :data-index="index">{{ item.name }}</button>
   </div>  
   `;

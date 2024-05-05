@@ -10,7 +10,7 @@ const smallArg = (placeholder: string) => arg({
 const substring = await smallArg("Substring to search:");
 const lines = await smallArg("# surrounding lines in results:");
 
-const PROJECT_ROOT = "/Users/jwisskirchen/IdeaProjects/zz_python";
+const PROJECT_ROOT = "/Users/juergen/IdeaProjects/zz_python";
 const IDE = 'idea';
 const FILE_EXT = 'py';
 const CLOSE_LABEL = 'Close';

@@ -10,7 +10,7 @@ const smallArg = (placeholder: string) => arg({
 const substring = await smallArg("Substring to search:");
 const lines = await smallArg("# surrounding lines in results:");
 
-const PROJECT_ROOT = "/Users/jwisskirchen/IdeaProjects";
+const PROJECT_ROOT = "/Users/juergen/IdeaProjects";
 const IDE = 'idea';
 const FILE_EXT = 'java';
 const CLOSE_LABEL = 'Close';
